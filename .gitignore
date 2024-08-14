@@ -4,6 +4,7 @@ logs
 npm-debug.log*
 .env.local
 .env
+.DS_Store
 
 node_modules/
 
