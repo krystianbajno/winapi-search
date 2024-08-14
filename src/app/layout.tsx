@@ -4,9 +4,9 @@ import ClientLayout from "../app/components/layout/client-layout";
 
 export const metadata: Metadata = {
   title: "WinAPI Search",
-  description: "WinAPI search straight out of da hood.",
+  description: "WinAPI Search helps you find functions in WinAPI DLLs. You can search by DLL name, function name, return type, and parameters, with results showing matches for all your search terms.",
   openGraph: {
-    images: '',
+    images: 'https://winapi-search.vercel.app/images/windows.jpg',
   },
   keywords: ['WinAPI', 'search', 'index', 'functions'],
   authors: [
