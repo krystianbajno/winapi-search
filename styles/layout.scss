@@ -1,0 +1,20 @@
+@import "styles/colors";
+
+
+.page {
+  width:100%;
+  min-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem;
+  min-height: 20vh;
+}
+

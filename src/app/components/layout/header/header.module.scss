@@ -1,0 +1,46 @@
+@import "styles/colors.scss";
+@import "styles/layout.scss";
+
+
+.header {
+    z-index: 1000;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    min-height: 60px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(32, 32, 32);
+    padding: 8px 32px;
+}
+
+.headerLeft {}
+
+.headerCenter {
+    display: flex;
+    width: 40%;
+}
+
+.headerRight {
+    & > a {
+        font-size: 1.6rem;
+    }
+}
+
+.searchInput {
+    font-size: 1.2rem;
+    width: 100%;
+    background-color: rgb(20, 20, 22);
+    padding: 16px 32px;
+    border-radius: 16px;
+    border: 4px solid rgb(40, 40, 40);
+}
+
+.logo {
+    font-size: 1.6rem;
+}
+.headerContents {
+    color: white;
+}
+

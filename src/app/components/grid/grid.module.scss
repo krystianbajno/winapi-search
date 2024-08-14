@@ -1,0 +1,53 @@
+@import "styles/colors";
+
+.gridContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.dllItem {
+  flex: 1 1 calc(50% - 20px); 
+  background-color: $primary-background;
+  padding: 15px;
+  border-radius: 8px;
+  
+  h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 8px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      strong {
+        font-weight: 600;
+      }
+
+      ul {
+        margin-top: 5px;
+        padding-left: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .dllItem {
+    flex: 1 1 100%;
+  }
+}
+
+@media (min-width: 1500px) {
+  .dllItem {
+    flex: 1 1 calc(33.333% - 20px); // 3 columns per row
+  }
+}
