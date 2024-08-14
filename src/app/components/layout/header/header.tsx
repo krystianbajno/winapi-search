@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.headerLeft}>
-        <h1 className={styles.logo}>WinAPI Search</h1>
+        <h1 className={styles.logo}>WinAPI <span className={styles.search}>Search</span></h1>
       </div>
       <div className={styles.headerCenter}>
         <input

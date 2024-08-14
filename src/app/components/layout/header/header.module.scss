@@ -11,8 +11,11 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(34, 34, 39);
+    background-color: rgb(2, 5, 11);
     padding: 8px 32px;
+}
+.search {
+    color:   rgb(255, 167, 89);
 }
 
 .headerLeft {
@@ -29,7 +32,7 @@
 
 .headerRight {
     & > a {
-        font-size: 1.6rem;
+        font-size: 1.3rem;
     }
 
     @media screen and (max-width: 600px) {
@@ -40,14 +43,14 @@
 .searchInput {
     font-size: 1.2rem;
     width: 100%;
-    background-color: rgb(29, 29, 36);
+    background-color: rgb(2, 5, 11);
     padding: 16px 32px;
     border-radius: 16px;
-    border: 4px solid rgb(36, 36, 40);
+    border: 2px solid rgb(40, 40, 40);
 }
 
 .logo {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
 }
 .headerContents {
     color: white;
