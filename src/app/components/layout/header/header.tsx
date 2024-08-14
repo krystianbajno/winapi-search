@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './header.module.scss';
 import { useSearch } from '@/app/context/search-context';
+import {debounce} from "@/app/logic/debounce";
 
 const Header = () => {
-  const { searchTerm, setSearchTerm } = useSearch();
+  const { setSearchTerm } = useSearch();
+  const [ localSearch, setLocalSearch ] = useState("");
+
+  const search = (value) => {
+    setLocalSearch(value)
+    debounce(() => setSearchTerm(value), 369)
+  }
 
   return (
     <header className={styles.header}>
@@ -15,8 +22,8 @@ const Header = () => {
           type="text"
           placeholder="Search"
           className={styles.searchInput}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          value={localSearch}
+          onChange={(e) => search(e.target.value)}
         />
       </div>
       <div className={styles.headerRight}>
