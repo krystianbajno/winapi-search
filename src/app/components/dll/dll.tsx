@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { IWinApiDll } from '../../interfaces/winapi-dll';
 import Function from '../function/function';
 import styles from "./dll.module.scss";
@@ -8,15 +8,31 @@ interface DllProps {
   showContents: boolean;
 }
 
-const Dll: React.FC<DllProps> = ({ dll, showContents }) => (
-  <div className={styles.dllSection}>
-    <h2 className={styles.dllModuleName}>{dll.module_name}</h2>
-    {showContents && <ul>
-      {dll.functions.map((fn, index) => (
-        <Function key={`${fn.function_name}-${index}`} fn={fn} />
-      ))}
-    </ul>}
-  </div>
-);
+const Dll: React.FC<DllProps> = ({ dll, showContents }) => {
+  const [isContentVisible, setIsContentVisible] = useState(showContents);
+
+  useEffect(() => {
+    setIsContentVisible(showContents);
+  }, [showContents]);
+
+  const toggleContents = () => {
+    setIsContentVisible(prevState => !prevState);
+  };
+
+  return (
+    <div className={styles.dllSection}>
+      <h2 className={styles.dllModuleName} onClick={toggleContents}>
+        {dll.module_name}
+      </h2>
+      {isContentVisible && (
+        <ul>
+          {dll.functions.map((fn, index) => (
+            <Function key={`${fn.function_name}-${index}`} fn={fn} />
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
 
 export default Dll;

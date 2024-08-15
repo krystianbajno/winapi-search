@@ -17,7 +17,7 @@ const ToggleDllContentsSwitch: React.FC<ToggleDllContentsSwitchProps> = ({ isChe
           checked={isChecked}
           onChange={onToggle}
         />
-        Show DLL Contents
+        Show all DLL Contents
       </label>
     </div>
   );

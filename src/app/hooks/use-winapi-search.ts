@@ -11,7 +11,6 @@ export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 
   const observerRef = useRef<HTMLDivElement | null>(null); // Ref for the last element
   const intersectionObserverRef = useRef<IntersectionObserver | null>(null); // Ref for IntersectionObserver instance
 
-  // Fetch DLLs data
   useEffect(() => {
     const fetchDlls = async () => {
       try {
@@ -29,7 +28,6 @@ export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 
     fetchDlls();
   }, [itemsPerPage]);
 
-  // Filter and paginate DLLs
   useEffect(() => {
     if (!dlls.length) return;
 
@@ -76,7 +74,6 @@ export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 
     setFilteredDlls(filtered.slice(0, page * itemsPerPage));
   }, [searchTerm, dlls, page, itemsPerPage]);
 
-  // Handle Intersection Observer for infinite scrolling
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     const target = entries[0];
     if (target.isIntersecting) {
@@ -86,7 +83,7 @@ export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 
 
   const initializeObserver = useCallback(() => {
     if (intersectionObserverRef.current) {
-      intersectionObserverRef.current.disconnect(); // Disconnect any existing observer
+      intersectionObserverRef.current.disconnect();
     }
 
     intersectionObserverRef.current = new IntersectionObserver(handleObserver, {
@@ -116,7 +113,7 @@ export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 
     loading,
     error,
     setPage,
-    observerRef, // Returning the observer ref to be attached to the "load more" element
-    initializeObserver, // Function to manually re-trigger the observer
+    observerRef,
+    initializeObserver,
   };
 };
