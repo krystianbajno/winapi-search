@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import WinApiGrid from '../../components/grid/grid';
-import { useWinApiSearch } from '../../hooks/use-winapi-search';
+import WinApiGrid from '@/app/components/grid/grid';
+import { useWinApiSearch } from '@/app/hooks/use-winapi-search';
 import { useSearch } from '@/app/context/search-context';
 
 interface WinApiSearchProps {
@@ -11,7 +11,6 @@ const WinApiSearch: React.FC<WinApiSearchProps> = ({ showContents }) => {
   const { searchTerm } = useSearch();
   const { filteredDlls, loading, error, observerRef, initializeObserver } = useWinApiSearch(searchTerm);
 
-  // Re-trigger the observer when showContents changes
   useEffect(() => {
     initializeObserver();
   }, [showContents, initializeObserver]);

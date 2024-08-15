@@ -1,4 +1,4 @@
-import { IWinApiDllFunction } from "./winapi-function";
+import { IWinApiDllFunction } from "@/app/interfaces/winapi-function";
 
 
 export interface IWinApiDll {

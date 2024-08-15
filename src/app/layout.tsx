@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import ClientLayout from "../app/components/layout/client-layout";
+import "@/app/globals.css";
+import ClientLayout from "@/app/components/layout/client-layout";
 
 export const metadata: Metadata = {
   title: "WinAPI Search",

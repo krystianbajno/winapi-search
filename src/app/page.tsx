@@ -1,10 +1,10 @@
 'use client';
 
-import styles from "./page.module.scss";
-import WinApiSearch from "./components/winapi-search/winapi-search";
+import styles from "@/app/page.module.scss";
+import WinApiSearch from "@/app/components/winapi-search/winapi-search";
 import { useState } from 'react';
-import ToggleDllContentsSwitch from './components/controls/toggle-dll-contents-switch';
-import UsefulLinks from "./components/useful-links/useful-links";
+import ToggleDllContentsSwitch from '@/app/components/controls/toggle-dll-contents-switch';
+import UsefulLinks from "@/app/components/useful-links/useful-links";
 
 
 const links = [

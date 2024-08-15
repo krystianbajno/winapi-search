@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { IWinApiDll } from "../../interfaces/winapi-dll";
+import { IWinApiDll } from "@/app/interfaces/winapi-dll";
 
 class WinAPI {
   private _instance: AxiosInstance;

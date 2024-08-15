@@ -1,6 +1,6 @@
 import React from 'react';
-import { IWinApiDllFunction } from '../../interfaces/winapi-function';
-import styles from "./function.module.scss";
+import { IWinApiDllFunction } from '@/app/interfaces/winapi-function';
+import styles from "@/app/components/function/function.module.scss";
 
 interface FunctionProps {
   fn: IWinApiDllFunction;

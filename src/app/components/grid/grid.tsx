@@ -1,7 +1,7 @@
 import React from 'react';
-import { IWinApiDll } from '../../interfaces/winapi-dll';
-import Dll from '../dll/dll';
-import styles from './grid.module.scss';
+import { IWinApiDll } from '@/app/interfaces/winapi-dll';
+import Dll from '@/app/components/dll/dll';
+import styles from '@/app/components/grid/grid.module.scss';
 
 interface GridProps {
   dlls: IWinApiDll[];

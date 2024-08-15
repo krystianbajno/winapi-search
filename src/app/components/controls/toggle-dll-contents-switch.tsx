@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import styles from "./toggle-dll-contents-switch.module.scss";
+import styles from "@/app/components/controls/toggle-dll-contents-switch.module.scss";
 
 interface ToggleDllContentsSwitchProps {
   isChecked: boolean;

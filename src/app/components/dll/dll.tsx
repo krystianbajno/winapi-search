@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { IWinApiDll } from '../../interfaces/winapi-dll';
-import Function from '../function/function';
-import styles from "./dll.module.scss";
+import { IWinApiDll } from '@/app/interfaces/winapi-dll';
+import Function from '@/app/components/function/function';
+import styles from "@/app/components/dll/dll.module.scss";
 
 interface DllProps {
   dll: IWinApiDll;

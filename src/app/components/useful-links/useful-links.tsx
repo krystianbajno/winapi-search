@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "./useful-links.module.scss";
+import styles from "@/app/components/useful-links/useful-links.module.scss";
 
 interface UsefulLinksProps {
   links: { name: string; href: string }[];

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './header.module.scss';
+import styles from '@/app/components/layout/header/header.module.scss';
 import { useSearch } from '@/app/context/search-context';
 import {debounce} from "@/app/logic/debounce";
 
