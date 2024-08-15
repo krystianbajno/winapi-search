@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { IWinApiDll } from '@/app/interfaces/winapi-dll';
 import { Dlls } from '@/app/logic/api/winapi';
 
-export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 32) => {
+export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 16) => {
   const [dlls, setDlls] = useState<IWinApiDll[]>([]);
   const [filteredDlls, setFilteredDlls] = useState<IWinApiDll[]>([]);
   const [loading, setLoading] = useState(true);

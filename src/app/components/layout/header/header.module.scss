@@ -25,6 +25,7 @@
 }
 
 .headerBottom {
+    display: flex;
     @media screen and (min-width: 541px) {
         display: none;
     }

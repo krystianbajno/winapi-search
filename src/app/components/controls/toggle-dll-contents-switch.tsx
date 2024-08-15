@@ -10,16 +10,18 @@ interface ToggleDllContentsSwitchProps {
 
 const ToggleDllContentsSwitch: React.FC<ToggleDllContentsSwitchProps> = ({ isChecked, onToggle }) => {
   return (
-    <div className={styles.toggleContainer}>
-      <label>
-        <input
-          type="checkbox"
-          checked={isChecked}
-          onChange={onToggle}
-        />
-        Show all DLL Contents
-      </label>
-    </div>
+    <button
+      className={styles.toggleButton}
+      onClick={onToggle}
+      aria-label={isChecked ? "Hide all DLL Contents" : "Show all DLL Contents"}
+      title={isChecked ? "Hide all DLL Contents" : "Show all DLL Contents"}
+    >
+      <img
+        src={isChecked ? "/icons/eye-open.svg" : "/icons/eye-closed.svg"}
+        alt={isChecked ? "Hide DLL Contents" : "Show DLL Contents"}
+        className={styles.icon}
+      />
+    </button>
   );
 };
 

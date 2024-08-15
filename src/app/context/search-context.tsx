@@ -2,16 +2,23 @@ import React, { createContext, useContext, useState } from "react";
 
 interface SearchContextType {
   searchTerm: string;
+  showContents: boolean;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  handleToggleContents: () => void;
 }
 
 const SearchContext = createContext<SearchContextType | undefined>(undefined);
 
 export const SearchProvider = ({ children }: { children: React.ReactNode }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [showContents, setShowContents] = useState(true);
+
+  const handleToggleContents = () => {
+    setShowContents(prevState => !prevState);
+  };
 
   return (
-    <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>
+    <SearchContext.Provider value={{ searchTerm, setSearchTerm, showContents, handleToggleContents }}>
       {children}
     </SearchContext.Provider>
   );

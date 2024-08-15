@@ -3,17 +3,9 @@ import WinApiGrid from '@/app/components/grid/grid';
 import { useWinApiSearch } from '@/app/hooks/use-winapi-search';
 import { useSearch } from '@/app/context/search-context';
 
-interface WinApiSearchProps {
-  showContents: boolean;
-}
-
-const WinApiSearch: React.FC<WinApiSearchProps> = ({ showContents }) => {
-  const { searchTerm } = useSearch();
-  const { filteredDlls, loading, error, observerRef, initializeObserver } = useWinApiSearch(searchTerm);
-
-  useEffect(() => {
-    initializeObserver();
-  }, [showContents, initializeObserver]);
+const WinApiSearch = () => {
+  const { searchTerm, showContents } = useSearch();
+  const { filteredDlls, loading, error, observerRef } = useWinApiSearch(searchTerm);
 
   if (loading && filteredDlls.length === 0) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;

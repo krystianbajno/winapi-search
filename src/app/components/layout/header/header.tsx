@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import styles from '@/app/components/layout/header/header.module.scss';
 import { useSearch } from '@/app/context/search-context';
-import {debounce} from "@/app/logic/debounce";
+import { debounce } from '@/app/logic/debounce';
+import ToggleDllContentsSwitch from '../../controls/toggle-dll-contents-switch';
 
 const Header = () => {
-  const { setSearchTerm } = useSearch();
-  const [ localSearch, setLocalSearch ] = useState("");
+  const { setSearchTerm, handleToggleContents, showContents } = useSearch();
+  const [localSearch, setLocalSearch] = useState('');
 
-  const search = (value) => {
-    setLocalSearch(value)
-    debounce(() => setSearchTerm(value), 369)
-  }
+  const search = (value: string) => {
+    setLocalSearch(value);
+    debounce(() => setSearchTerm(value), 369);
+  };
 
   return (
     <>
@@ -27,6 +28,7 @@ const Header = () => {
               value={localSearch}
               onChange={(e) => search(e.target.value)}
             />
+            <ToggleDllContentsSwitch isChecked={showContents} onToggle={handleToggleContents} />
           </div>
           <div className={styles.headerRight}>
             <a href="https://github.com/krystianbajno/winapi-search">
@@ -36,12 +38,13 @@ const Header = () => {
         </div>
         <div className={styles.headerBottom}>
           <input
-                type="text"
-                placeholder="Search"
-                className={styles.searchInput}
-                value={localSearch}
-                onChange={(e) => search(e.target.value)}
-            />
+            type="text"
+            placeholder="Search"
+            className={styles.searchInput}
+            value={localSearch}
+            onChange={(e) => search(e.target.value)}
+          />
+          <ToggleDllContentsSwitch isChecked={showContents} onToggle={handleToggleContents} />
         </div>
       </header>
       <div className={styles.headerBreak}></div>
