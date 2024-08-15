@@ -1,15 +1,13 @@
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { IWinApiDll } from '@/app/interfaces/winapi-dll';
 import { Dlls } from '@/app/logic/api/winapi';
 
-export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 64) => {
+export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 8) => {
   const [dlls, setDlls] = useState<IWinApiDll[]>([]);
   const [filteredDlls, setFilteredDlls] = useState<IWinApiDll[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
-  const observerRef = useRef<HTMLDivElement | null>(null); 
-  const intersectionObserverRef = useRef<IntersectionObserver | null>(null); 
 
   useEffect(() => {
     const fetchDlls = async () => {
@@ -74,46 +72,11 @@ export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 
     setFilteredDlls(filtered.slice(0, page * itemsPerPage));
   }, [searchTerm, dlls, page, itemsPerPage]);
 
-  const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
-    const target = entries[0];
-    if (target.isIntersecting) {
-      setPage(prevPage => prevPage + 1);
-    }
-  }, []);
-
-  const initializeObserver = useCallback(() => {
-    if (intersectionObserverRef.current) {
-      intersectionObserverRef.current.disconnect();
-    }
-
-    intersectionObserverRef.current = new IntersectionObserver(handleObserver, {
-      root: null,
-      rootMargin: '20px',
-      threshold: 0.1,
-    });
-
-    if (observerRef.current) {
-      intersectionObserverRef.current.observe(observerRef.current);
-    }
-  }, [handleObserver]);
-
-  useEffect(() => {
-    initializeObserver();
-
-    return () => {
-      if (intersectionObserverRef.current) {
-        intersectionObserverRef.current.disconnect();
-      }
-    };
-  }, [initializeObserver]);
-
   return {
     dlls,
     filteredDlls,
     loading,
     error,
     setPage,
-    observerRef,
-    initializeObserver,
   };
 };
