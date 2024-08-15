@@ -2,14 +2,14 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { IWinApiDll } from '@/app/interfaces/winapi-dll';
 import { Dlls } from '@/app/logic/api/winapi';
 
-export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 16) => {
+export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 64) => {
   const [dlls, setDlls] = useState<IWinApiDll[]>([]);
   const [filteredDlls, setFilteredDlls] = useState<IWinApiDll[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
-  const observerRef = useRef<HTMLDivElement | null>(null); // Ref for the last element
-  const intersectionObserverRef = useRef<IntersectionObserver | null>(null); // Ref for IntersectionObserver instance
+  const observerRef = useRef<HTMLDivElement | null>(null); 
+  const intersectionObserverRef = useRef<IntersectionObserver | null>(null); 
 
   useEffect(() => {
     const fetchDlls = async () => {
