@@ -1,7 +1,7 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { IWinApiDll } from '@/app/interfaces/winapi-dll';
 import { Dlls } from '@/app/logic/api/winapi';
-import { matchToken, scoreAndRankResults, determineSearchContext } from '@/app/logic/search'
+import { matchToken, scoreAndRankResults, determineSearchContext } from '@/app/logic/search';
 
 export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 8) => {
   const [dlls, setDlls] = useState<IWinApiDll[]>([]);
@@ -27,32 +27,27 @@ export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 
     fetchDlls();
   }, [itemsPerPage]);
 
-  const searchResults = useMemo(() => {
-    if (!dlls.length) return [];
+  useEffect(() => {
+    if (!dlls.length) return;
 
-    if (searchTerm.length === 0) {
-      return dlls;
-    }
-    
     const normalizedSearchTerm = searchTerm.toLowerCase();
     const searchTokens = normalizedSearchTerm.split(' ').filter(token => token);
+
+    if (!searchTokens.length) {
+      setFilteredDlls(dlls.slice(0, page * itemsPerPage));
+      return
+    } 
 
     const { dllName, functionName } = determineSearchContext(searchTokens);
 
     const filteredResults = scoreAndRankResults(dlls, searchTokens);
 
-    if (dllName && functionName) {
-      return filteredResults
-        .filter(dll => matchToken(dllName, dll.module_name))
-        .slice(0, page * itemsPerPage);
-    }
+    const results = (dllName && functionName) 
+      ? filteredResults.filter(dll => matchToken(dllName, dll.module_name))
+      : filteredResults;
 
-    return filteredResults.slice(0, page * itemsPerPage);
+    setFilteredDlls(results.slice(0, page * itemsPerPage));
   }, [searchTerm, dlls, page, itemsPerPage]);
-
-  useEffect(() => {
-    setFilteredDlls(searchResults);
-  }, [searchResults]);
 
   return {
     dlls,
