@@ -10,7 +10,6 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     <SearchProvider>
       <div className="page-wrap">
         <Header />
-        <div className={styles.headerBreak}></div>
         {children}
       </div>
     </SearchProvider>
