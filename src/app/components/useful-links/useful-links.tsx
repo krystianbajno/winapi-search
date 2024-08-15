@@ -10,7 +10,7 @@ const UsefulLinks: React.FC<UsefulLinksProps> = ({ links }) => {
     <div className={styles.usefulLinks}>
       {links.map((link, index) => (
         <a className={styles.link} key={`${link}-${index}`} href={link.href}>
-          - {link.name}
+          @ {link.name}
         </a>
       ))}
     </div>
