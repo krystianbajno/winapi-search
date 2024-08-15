@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { IWinApiDll } from '@/app/interfaces/winapi-dll';
 import { Dlls } from '@/app/logic/api/winapi';
+import { matchToken, scoreAndRankResults, determineSearchContext } from '@/app/logic/search'
 
 export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 8) => {
   const [dlls, setDlls] = useState<IWinApiDll[]>([]);
@@ -26,51 +27,32 @@ export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 
     fetchDlls();
   }, [itemsPerPage]);
 
-  useEffect(() => {
-    if (!dlls.length) return;
+  const searchResults = useMemo(() => {
+    if (!dlls.length) return [];
 
+    if (searchTerm.length === 0) {
+      return dlls;
+    }
+    
     const normalizedSearchTerm = searchTerm.toLowerCase();
     const searchTokens = normalizedSearchTerm.split(' ').filter(token => token);
 
-    const filtered = dlls.map(dll => {
-      const dllNameMatches = searchTokens.some(token =>
-        dll.module_name.toLowerCase().includes(token)
-      );
+    const { dllName, functionName } = determineSearchContext(searchTokens);
 
-      const matchingFunctions = dll.functions.filter(fn => {
-        return searchTokens.some(token =>
-          fn.function_name.toLowerCase().includes(token) ||
-          fn.ret_type.toLowerCase().includes(token) ||
-          fn.params.some(param => param.toLowerCase().includes(token))
-        );
-      });
+    const filteredResults = scoreAndRankResults(dlls, searchTokens);
 
-      const allTokensMatch = searchTokens.every(token =>
-        dll.module_name.toLowerCase().includes(token) ||
-        matchingFunctions.some(fn =>
-          fn.function_name.toLowerCase().includes(token) ||
-          fn.ret_type.toLowerCase().includes(token) ||
-          fn.params.some(param => param.toLowerCase().includes(token))
-        )
-      );
+    if (dllName && functionName) {
+      return filteredResults
+        .filter(dll => matchToken(dllName, dll.module_name))
+        .slice(0, page * itemsPerPage);
+    }
 
-      if (allTokensMatch || searchTerm === '') {
-        return {
-          ...dll,
-          functions: matchingFunctions.length > 0 ? matchingFunctions : dll.functions,
-        };
-      } else if (dllNameMatches) {
-        return {
-          ...dll,
-          functions: dll.functions,
-        };
-      } else {
-        return null;
-      }
-    }).filter(dll => dll !== null) as IWinApiDll[];
-
-    setFilteredDlls(filtered.slice(0, page * itemsPerPage));
+    return filteredResults.slice(0, page * itemsPerPage);
   }, [searchTerm, dlls, page, itemsPerPage]);
+
+  useEffect(() => {
+    setFilteredDlls(searchResults);
+  }, [searchResults]);
 
   return {
     dlls,
