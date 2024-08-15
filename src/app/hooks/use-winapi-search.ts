@@ -28,6 +28,10 @@ export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 
   }, [itemsPerPage]);
 
   useEffect(() => {
+    setPage(1);
+  }, [searchTerm]);
+
+  useEffect(() => {
     if (!dlls.length) return;
 
     const normalizedSearchTerm = searchTerm.toLowerCase();
@@ -35,8 +39,8 @@ export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 
 
     if (!searchTokens.length) {
       setFilteredDlls(dlls.slice(0, page * itemsPerPage));
-      return
-    } 
+      return;
+    }
 
     const { dllName, functionName } = determineSearchContext(searchTokens);
 
