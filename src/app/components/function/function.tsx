@@ -8,7 +8,10 @@ interface FunctionProps {
 
 const Function: React.FC<FunctionProps> = ({ fn }) => (
   <li>
-    <strong>{fn.function_name}</strong>: {fn.ret_type}
+    { fn.function_link ?
+      <strong><a className={styles.functionLink} href={fn.function_link}>{fn.function_name}</a></strong>
+      : <strong>{fn.function_name}</strong>
+    }:  {fn.ret_type}
     <ul>
       {fn.params.map((param, index) => (
         <li key={`${param}-${index}`}>{param}</li>
