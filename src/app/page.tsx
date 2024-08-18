@@ -10,7 +10,12 @@ const links = [
   { name: "Undocumented NTInternals", href: "http://undocumented.ntinternals.net/" },
   { name: "ReactOS Documentation", href: "https://doxygen.reactos.org/d6/d9e/include_2reactos_2wine_2winternl_8h.html#a105971fca93ccfeff87707348ea92ac3" },
   { name: "MalAPI.io", href: "https://malapi.io/#" },
-  { name: "Unprotect.it", href: "https://unprotect.it" }
+  { name: "Unprotect.it", href: "https://unprotect.it" },
+  { name: "syscalls - ntoskrnl.exe x86", href:"https://j00ru.vexillium.org/syscalls/nt/32/"},
+  { name: "syscalls - ntoskrnl.exe x64", href:"https://j00ru.vexillium.org/syscalls/nt/64/"},
+  { name: "syscalls - win32k.sys x86", href:"https://j00ru.vexillium.org/syscalls/win32k/32/"},
+  { name: "syscalls - win32k.sys x64", href:"https://j00ru.vexillium.org/syscalls/win32k/64/"}
+
 ];
 
 export default function Home() {
