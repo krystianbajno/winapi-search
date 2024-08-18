@@ -16,8 +16,8 @@
 ## Collection
 This project works together with the [winapi_to_json](https://github.com/Artideusz/winapi_to_json) tool by **Artideusz**, which collects and formats WinAPI DLL metadata and exposes it as a daily refreshed endpoint. It gathers function metadata from Microsoft’s official repository [win32metadata](https://github.com/microsoft/win32metadata) and Rust [symbol bindings](https://github.com/microsoft/windows-rs/raw/master/crates/libs/bindgen/default/Windows.Win32.winmd) and makes them accessible through a refreshed GitHub release.
 
-For undocumented API's, I've created a collector that works like `winapi_to_json`, but uses [PHNT](https://github.com/winsiderss/phnt) repository with header files - [phnt-winapi-json](https://github.com/krystianbajno/phnt-winapi-json). The collector clones the PHNT repository and extracts undocumented definitions for `ntdll.dll`, and then exposes an API like `winapi_to_json` project.
+For undocumented API's, I've created a collector that works like `winapi_to_json`, but uses various sources - [undocumented-winapi-json](https://github.com/krystianbajno/undocumented-winapi-json).
 
 ## Credits
-- **Krystian Bajno** - winapi-search, [phnt-winapi-json](https://github.com/krystianbajno/phnt-winapi-json)
+- **Krystian Bajno** - winapi-search, [undocumented-winapi-json](https://github.com/krystianbajno/undocumented-winapi-json)
 - **Artideusz** - [winapi_to_json](https://github.com/Artideusz/winapi_to_json)
