@@ -19,6 +19,10 @@ const Dll: React.FC<DllProps> = ({ dll, showContents }) => {
     setIsContentVisible(showContents);
   }, [showContents]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [dll.functions])
+
   const toggleContents = () => {
     setIsContentVisible(prevState => !prevState);
   };
@@ -26,7 +30,6 @@ const Dll: React.FC<DllProps> = ({ dll, showContents }) => {
   const observerRef = useInfiniteScroll({
     onIntersect: () => setPage(prevPage => prevPage + 1),
   });
-
 
   return (
     <div className={styles.dllSection}>
