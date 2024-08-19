@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { IWinApiDll } from '@/app/interfaces/winapi-dll';
 import Function from '@/app/components/function/function';
 import styles from "@/app/components/dll/dll.module.scss";
@@ -27,7 +27,9 @@ const Dll: React.FC<DllProps> = ({ dll, showContents }) => {
       {isContentVisible && (
         <ul>
           {dll.functions.map((fn, index) => (
-            <Function key={`${fn.function_name}-${index}`} fn={fn} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Function key={`${fn.function_name}-${index}`} fn={fn} />
+            </Suspense>
           ))}
         </ul>
       )}
