@@ -3,7 +3,7 @@ import { IWinApiDll } from '@/app/interfaces/winapi-dll';
 import { Dlls } from '@/app/logic/api/winapi';
 import { search } from '@/app/logic/search';
 
-export const useWinApiSearch = (searchTerm: string = '', showSyscalls: boolean = false, itemsPerPage: number = 16) => {
+export const useWinApiSearch = (searchTerm: string = '', showSyscalls: boolean = false, itemsPerPage: number = 24) => {
   const [dlls, setDlls] = useState<IWinApiDll[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
