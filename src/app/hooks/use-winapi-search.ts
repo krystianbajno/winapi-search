@@ -53,6 +53,17 @@ export const useWinApiSearch = (searchTerm: string = '', showSyscalls: boolean =
       return;
     }
 
+    if (searchTokens.length === 1) {
+      const matchDll = filteredResults.filter(i => {
+        return i.module_name.toLowerCase().includes(searchTokens[0])
+      })
+
+      if (matchDll.length) {
+        setFilteredDlls(matchDll.slice(0, page * itemsPerPage));
+        return
+      }
+    }
+
     const { dllName, functionName } = determineSearchContext(searchTokens);
 
     filteredResults = scoreAndRankResults(filteredResults, searchTokens);

@@ -18,11 +18,12 @@ const Function: React.FC<FunctionProps> = ({ fn }) => (
         <li key={`${param}-${index}`}>{param}</li>
       ))}
     </ul>
-    <div className={styles.syscalls}>
+    {fn.syscalls.length > 0 && <details className={styles.syscalls}>
+      <summary>Syscalls</summary>
       {
         fn.syscalls.map((syscall, index) => {
           
-          return <div className={styles.syscall}>
+          return <div key={`${syscall.syscall_number}-${index}`} className={styles.syscall}>
             <div className={styles.hexNumber}>
               0x{syscall.syscall_number.toString(16)}
             </div>
@@ -44,7 +45,7 @@ const Function: React.FC<FunctionProps> = ({ fn }) => (
           </div>
         })
       }
-    </div>
+    </details>}
   </li>
 );
 

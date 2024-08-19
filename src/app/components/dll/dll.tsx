@@ -22,7 +22,7 @@ const Dll: React.FC<DllProps> = ({ dll, showContents }) => {
   return (
     <div className={styles.dllSection}>
       <h2 className={styles.dllModuleName} onClick={toggleContents}>
-        {dll.module_name}
+        ({dll.functions?.length}) {dll.module_name}
       </h2>
       {isContentVisible && (
         <ul>

@@ -9,6 +9,12 @@
 
 .syscalls {
     margin-top: 16px;
+    margin-bottom: 32px;
+
+    & > summary {
+        font-weight:800;
+        cursor: pointer;
+    }
 }
 
 .syscall {

@@ -54,7 +54,7 @@ export const scoreAndRankResults = (dlls: IWinApiDll[], searchTokens: string[]):
 };
 
 export const determineSearchContext = (searchTokens: string[]): { dllName: string, functionName: string } => {
-  const dllName = searchTokens.find(token => matchToken('dll', token)) || '';
-  const functionName = searchTokens.find(token => !matchToken('dll', token)) || '';
+  const dllName = searchTokens.find(token => matchToken('dll', token) || matchToken('sys', token)) || '';
+  const functionName = searchTokens.find(token => !matchToken('dll', token) && !matchToken('sys', token)) || '';
   return { dllName, functionName };
 };
