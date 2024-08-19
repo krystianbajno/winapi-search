@@ -18,7 +18,8 @@ export const scoreAndRankResults = (dlls: IWinApiDll[], searchTokens: string[]):
           matchToken(token, syscall.os_version) ||
           matchToken(token, syscall.service_pack) ||
           syscall.syscall_number.toString() === token ||          
-          syscall.syscall_number.toString(16) === token.toLowerCase() 
+          syscall.syscall_number.toString(16) == token.toLowerCase() ||
+          "0x" + syscall.syscall_number.toString(16) == token.toLowerCase() 
         )
       );
 
