@@ -4,6 +4,7 @@ export const matchToken = (token: string, target: string): boolean => {
   return target.toLowerCase().includes(token.toLowerCase());
 };
 
+// score
 export const scoreAndRankResults = (dlls: IWinApiDll[], searchTokens: string[]): IWinApiDll[] => {
   return dlls.map(dll => {
     const dllNameMatches = searchTokens.some(token => matchToken(token, dll.module_name));
