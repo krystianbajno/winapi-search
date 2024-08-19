@@ -16,8 +16,8 @@ export const scoreAndRankResults = (dlls: IWinApiDll[], searchTokens: string[]):
           matchToken(token, syscall.module_type) ||
           matchToken(token, syscall.os_version) ||
           matchToken(token, syscall.service_pack) ||
-          syscall.syscall_number.toString() === token ||           // Full match for decimal syscall_number
-          syscall.syscall_number.toString(16) === token.toLowerCase() // Full match for hexadecimal syscall_number
+          syscall.syscall_number.toString() === token ||          
+          syscall.syscall_number.toString(16) === token.toLowerCase() 
         )
       );
 
@@ -32,12 +32,12 @@ export const scoreAndRankResults = (dlls: IWinApiDll[], searchTokens: string[]):
         functionMatchesCount++;
         return {
           ...fn,
-          syscalls: matchingSyscalls // Only include matching syscalls
+          syscalls: matchingSyscalls 
         };
       }
 
       return null;
-    }).filter(fn => fn !== null); // Filter out null values
+    }).filter(fn => fn !== null);
 
     if (matchingFunctions.length > 0 || dllNameMatches) {
       return {
@@ -48,7 +48,7 @@ export const scoreAndRankResults = (dlls: IWinApiDll[], searchTokens: string[]):
     }
 
     return null;
-  }).filter(dll => dll !== null) // Filter out null values
+  }).filter(dll => dll !== null)
     .sort((a, b) => (b as any).score - (a as any).score);
 };
 
