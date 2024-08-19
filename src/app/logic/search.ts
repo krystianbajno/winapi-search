@@ -28,10 +28,6 @@ export const search = (searchTerm: string, showSyscalls: boolean, dlls: IWinApiD
     if (matchingModule.length) return matchingModule;
   }
 
-  return scoreAndRankResults(filteredResults, searchTokens);
-};
-
-export const scoreAndRankResults = (dlls: IWinApiDll[], searchTokens: string[]): IWinApiDll[] => {
   return dlls
     .map(dll => {
       let functionMatchesCount = 0;
@@ -70,12 +66,10 @@ export const scoreAndRankResults = (dlls: IWinApiDll[], searchTokens: string[]):
         return {
           ...dll,
           functions: matchingFunctions,
-          score: functionMatchesCount,
         };
       }
 
       return null;
     })
     .filter(Boolean)
-    .sort((a, b) => b.score - a.score);
 };
