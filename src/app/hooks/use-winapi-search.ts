@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { IWinApiDll } from '@/app/interfaces/winapi-dll';
 import { Dlls } from '@/app/logic/api/winapi';
-import { matchToken, scoreAndRankResults, determineSearchContext } from '@/app/logic/search';
+import { matchToken, scoreAndRankResults, determineSearchContext, search } from '@/app/logic/search';
 
 export const useWinApiSearch = (searchTerm: string = '', showSyscalls: boolean = false, itemsPerPage: number = 8) => {
   const [dlls, setDlls] = useState<IWinApiDll[]>([]);
@@ -31,48 +31,11 @@ export const useWinApiSearch = (searchTerm: string = '', showSyscalls: boolean =
     setPage(1);
   }, [searchTerm, showSyscalls]);
 
+
   useEffect(() => {
-    if (!dlls.length) return;
-
-    const normalizedSearchTerm = searchTerm.toLowerCase();
-    const searchTokens = normalizedSearchTerm.split(' ').filter(token => token);
-
-    let filteredResults = dlls;
-
-    if (showSyscalls) {
-      filteredResults = filteredResults
-        .map(dll => ({
-          ...dll,
-          functions: dll.functions.filter(func => func.syscalls && func.syscalls.length > 0)
-        }))
-        .filter(dll => dll.functions.length > 0);
-    }
-
-    if (!searchTokens.length) {
-      setFilteredDlls(filteredResults.slice(0, page * itemsPerPage));
-      return;
-    }
-
-    if (searchTokens.length === 1) {
-      const matchDll = filteredResults.filter(i => {
-        return i.module_name.toLowerCase().includes(searchTokens[0])
-      })
-
-      if (matchDll.length) {
-        setFilteredDlls(matchDll.slice(0, page * itemsPerPage));
-        return
-      }
-    }
-
-    const { dllName, functionName } = determineSearchContext(searchTokens);
-
-    filteredResults = scoreAndRankResults(filteredResults, searchTokens);
-
-    const results = (dllName && functionName) 
-      ? filteredResults.filter(dll => matchToken(dllName, dll.module_name))
-      : filteredResults;
-
-    setFilteredDlls(results.slice(0, page * itemsPerPage));
+    const results = search(searchTerm, showSyscalls, dlls)
+    const sortedResults = results.sort((a, b) => b.functions.length - a.functions.length);
+    setFilteredDlls(sortedResults.slice(0, page * itemsPerPage));
   }, [searchTerm, dlls, page, itemsPerPage, showSyscalls]);
 
   return {
