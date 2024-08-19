@@ -10,7 +10,7 @@
     background-color: rgb(2, 5, 11);
     padding: 8px 32px;
 
-    @media screen and (max-width: 540px) {
+    @media screen and (max-width: 841px) {
         padding: 8px 16px;
     }
   
@@ -26,7 +26,7 @@
 
 .headerBottom {
     display: flex;
-    @media screen and (min-width: 541px) {
+    @media screen and (min-width: 841px) {
         display: none;
     }
 }
@@ -41,7 +41,7 @@
     display: flex;
     width: 50%;
 
-    @media screen and (max-width: 541px) {
+    @media screen and (max-width: 841px) {
         display: none;
     }
 }
@@ -78,7 +78,7 @@
     position: relative;
     padding-top: 90px;
 
-    @media screen and (max-width: 541px) {
+    @media screen and (max-width: 841px) {
         padding-top: 128px;
     }
 }

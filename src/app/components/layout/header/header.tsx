@@ -3,9 +3,10 @@ import styles from '@/app/components/layout/header/header.module.scss';
 import { useSearch } from '@/app/context/search-context';
 import { debounce } from '@/app/logic/debounce';
 import ToggleDllContentsSwitch from '../../controls/toggle-dll-contents-switch';
+import ToggleSyscalls from '../../controls/toggle-syscalls-switch';
 
 const Header = () => {
-  const { setSearchTerm, handleToggleContents, showContents } = useSearch();
+  const { setSearchTerm, handleToggleContents, showContents, showSyscalls, handleToggleSyscalls } = useSearch();
   const [localSearch, setLocalSearch] = useState('');
 
   const search = (value: string) => {
@@ -29,6 +30,7 @@ const Header = () => {
               onChange={(e) => search(e.target.value)}
             />
             <ToggleDllContentsSwitch isChecked={showContents} onToggle={handleToggleContents} />
+            <ToggleSyscalls isChecked={showSyscalls} onToggle={handleToggleSyscalls}/>
           </div>
           <div className={styles.headerRight}>
             <a href="https://github.com/krystianbajno/winapi-search">
@@ -45,6 +47,7 @@ const Header = () => {
             onChange={(e) => search(e.target.value)}
           />
           <ToggleDllContentsSwitch isChecked={showContents} onToggle={handleToggleContents} />
+          <ToggleSyscalls isChecked={showSyscalls} onToggle={handleToggleSyscalls}/>
         </div>
       </header>
       <div className={styles.headerBreak}></div>

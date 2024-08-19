@@ -3,7 +3,7 @@ import { IWinApiDll } from '@/app/interfaces/winapi-dll';
 import { Dlls } from '@/app/logic/api/winapi';
 import { matchToken, scoreAndRankResults, determineSearchContext } from '@/app/logic/search';
 
-export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 8) => {
+export const useWinApiSearch = (searchTerm: string = '', showSyscalls: boolean = false, itemsPerPage: number = 8) => {
   const [dlls, setDlls] = useState<IWinApiDll[]>([]);
   const [filteredDlls, setFilteredDlls] = useState<IWinApiDll[]>([]);
   const [loading, setLoading] = useState(true);
@@ -29,7 +29,7 @@ export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 
 
   useEffect(() => {
     setPage(1);
-  }, [searchTerm]);
+  }, [searchTerm, showSyscalls]);
 
   useEffect(() => {
     if (!dlls.length) return;
@@ -37,21 +37,32 @@ export const useWinApiSearch = (searchTerm: string = '', itemsPerPage: number = 
     const normalizedSearchTerm = searchTerm.toLowerCase();
     const searchTokens = normalizedSearchTerm.split(' ').filter(token => token);
 
+    let filteredResults = dlls;
+
+    if (showSyscalls) {
+      filteredResults = filteredResults
+        .map(dll => ({
+          ...dll,
+          functions: dll.functions.filter(func => func.syscalls && func.syscalls.length > 0)
+        }))
+        .filter(dll => dll.functions.length > 0);
+    }
+
     if (!searchTokens.length) {
-      setFilteredDlls(dlls.slice(0, page * itemsPerPage));
+      setFilteredDlls(filteredResults.slice(0, page * itemsPerPage));
       return;
     }
 
     const { dllName, functionName } = determineSearchContext(searchTokens);
 
-    const filteredResults = scoreAndRankResults(dlls, searchTokens);
+    filteredResults = scoreAndRankResults(filteredResults, searchTokens);
 
     const results = (dllName && functionName) 
       ? filteredResults.filter(dll => matchToken(dllName, dll.module_name))
       : filteredResults;
 
     setFilteredDlls(results.slice(0, page * itemsPerPage));
-  }, [searchTerm, dlls, page, itemsPerPage]);
+  }, [searchTerm, dlls, page, itemsPerPage, showSyscalls]);
 
   return {
     dlls,

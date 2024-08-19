@@ -1,0 +1,35 @@
+.toggleContainer {
+  margin-bottom: 20px;
+
+}
+
+.toggleButton {
+  margin-left: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  position: relative; 
+  font-size: 1.2rem;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.toggle-false {
+  font-weight: 800;
+  color: #aaaaaa;
+}
+
+.toggle-true {
+  font-weight: 800;
+  color: #bbffd7;
+}

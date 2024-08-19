@@ -2,3 +2,39 @@
     color: rgb(185, 206, 255);
     cursor: pointer;
 }
+
+.isSyscall {
+    color: #fa9a9a !important;
+}
+
+.syscalls {
+    margin-top: 16px;
+}
+
+.syscall {
+    display: flex;
+    flex-direction: row;
+    gap: 9px;
+}
+
+.hexNumber {
+    min-width: 64px;
+    font-weight: 800;
+}
+
+.decimalNumber {
+    min-width: 42px;
+    font-weight: 800;
+}
+
+.moduleType, .architecture {
+    color: #ffc7da;
+}
+
+.x64 {
+    color: rgb(255, 137, 137) !important;
+}
+
+.x86 {
+    color: rgb(127, 127, 255);
+}

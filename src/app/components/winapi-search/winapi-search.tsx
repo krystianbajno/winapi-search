@@ -5,8 +5,8 @@ import { useSearch } from '@/app/context/search-context';
 import { useInfiniteScroll } from '@/app/hooks/use-infinite-scroll';
 
 const WinApiSearch: React.FC = () => {
-  const { searchTerm, showContents } = useSearch();
-  const { filteredDlls, loading, error, setPage } = useWinApiSearch(searchTerm);
+  const { searchTerm, showContents, showSyscalls } = useSearch();
+  const { filteredDlls, loading, error, setPage } = useWinApiSearch(searchTerm, showSyscalls);
 
   const observerRef = useInfiniteScroll({
     onIntersect: () => setPage(prevPage => prevPage + 1),
