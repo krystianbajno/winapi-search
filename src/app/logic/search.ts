@@ -9,26 +9,46 @@ export const scoreAndRankResults = (dlls: IWinApiDll[], searchTokens: string[]):
     const dllNameMatches = searchTokens.some(token => matchToken(token, dll.module_name));
     let functionMatchesCount = 0;
 
-    const matchingFunctions = dll.functions.filter(fn => {
+    const matchingFunctions = dll.functions.map(fn => {
+      const matchingSyscalls = fn.syscalls.filter(syscall =>
+        searchTokens.some(token =>
+          matchToken(token, syscall.architecture) ||
+          matchToken(token, syscall.module_type) ||
+          matchToken(token, syscall.os_version) ||
+          matchToken(token, syscall.service_pack) ||
+          syscall.syscall_number.toString() === token ||           // Full match for decimal syscall_number
+          syscall.syscall_number.toString(16) === token.toLowerCase() // Full match for hexadecimal syscall_number
+        )
+      );
+
       const functionMatches = searchTokens.some(token =>
         matchToken(token, fn.function_name) ||
         matchToken(token, fn.ret_type) ||
-        fn.params.some(param => matchToken(token, param))
+        fn.params.some(param => matchToken(token, param)) ||
+        matchingSyscalls.length > 0
       );
-      if (functionMatches) functionMatchesCount++;
-      return functionMatches;
-    });
+
+      if (functionMatches) {
+        functionMatchesCount++;
+        return {
+          ...fn,
+          syscalls: matchingSyscalls // Only include matching syscalls
+        };
+      }
+
+      return null;
+    }).filter(fn => fn !== null); // Filter out null values
 
     if (matchingFunctions.length > 0 || dllNameMatches) {
       return {
         ...dll,
-        functions: matchingFunctions.length > 0 ? matchingFunctions : dll.functions,
-        score: functionMatchesCount
+        functions: matchingFunctions,
+        score: functionMatchesCount,
       };
     }
 
     return null;
-  }).filter(dll => dll !== null)
+  }).filter(dll => dll !== null) // Filter out null values
     .sort((a, b) => (b as any).score - (a as any).score);
 };
 
