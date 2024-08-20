@@ -12,7 +12,7 @@ const links = [
   { name: "MalAPI.io", href: "https://malapi.io/#" },
   { name: "Unprotect.it", href: "https://unprotect.it" },
   { name: "Vergilius Project", href: "https://www.vergiliusproject.com"},
-  { name: "WinAPI bindings", href: "https://github.com/microsoft/windows-rs/tree/master/crates/libs/bindgen/default"},
+  { name: "Rust WinAPI bindings", href: "https://github.com/microsoft/windows-rs/tree/master/crates/libs/bindgen/default"},
   { name: "syscalls - ntoskrnl.exe x86", href:"https://j00ru.vexillium.org/syscalls/nt/32/"},
   { name: "syscalls - ntoskrnl.exe x64", href:"https://j00ru.vexillium.org/syscalls/nt/64/"},
   { name: "syscalls - win32k.sys x86", href:"https://j00ru.vexillium.org/syscalls/win32k/32/"},
