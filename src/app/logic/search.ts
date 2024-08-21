@@ -4,6 +4,7 @@ export const matchToken = (token: string, target: string): boolean => {
   return target.toLowerCase().includes(token.toLowerCase());
 };
 
+//search
 export const search = (searchTerm: string, showSyscalls: boolean, dlls: IWinApiDll[]) => {
   const normalizedSearchTerm = searchTerm.toLowerCase();
   const searchTokens = normalizedSearchTerm.split(' ').filter(Boolean);
