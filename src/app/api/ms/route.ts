@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// link shortener
 export async function GET(request: NextRequest) {
   try {
     return Response.redirect("https://github.com/microsoft/windows-rs/tree/master/crates/libs/bindgen/default")
