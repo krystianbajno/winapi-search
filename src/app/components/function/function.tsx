@@ -8,7 +8,7 @@ interface FunctionProps {
 
 
 const Function: React.FC<FunctionProps> = ({ fn }) => (
-  <li>
+  <li className={styles.function}>
     { fn.function_link ?
       <strong><a className={styles.functionLink + (fn.syscalls.length > 0 ? ` ${styles.isSyscall}` : "")} href={fn.function_link}>{fn.function_name}</a></strong>
       : <strong>{fn.function_name}</strong>
