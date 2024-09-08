@@ -1,3 +1,5 @@
+@import "styles/colors";
+
 .toggleContainer {
   margin-bottom: 20px;
 
@@ -31,5 +33,5 @@
 
 .toggle-true {
   font-weight: 800;
-  color: #bbffd7;
+  color: $syscallOn;
 }

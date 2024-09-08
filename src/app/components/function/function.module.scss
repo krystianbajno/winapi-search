@@ -5,12 +5,12 @@
     margin-top:16px;
 }
 .functionLink {
-    color: rgb(185, 206, 255);
+    color: $functionLink;
     cursor: pointer;
 }
 
 .isSyscall {
-    color: #fa9a9a !important;
+    color: $syscall !important;
 }
 
 .syscalls {
@@ -21,6 +21,7 @@
         font-weight:800;
         cursor: pointer;
         margin-bottom: 16px;
+        color: $syscall;
     }
 }
 
@@ -28,7 +29,7 @@
     display: flex;
     flex-direction: row;
     gap: 9px;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 .hexNumber {

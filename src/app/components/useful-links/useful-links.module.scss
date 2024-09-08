@@ -14,10 +14,10 @@
     font-size: 1.2rem;
     font-weight: 600;
     margin-top: 8px;
-    color: $primary;
+    color: $linksText;
 }
 
 .link:hover {
     text-decoration: underline;
-    color: $accent;
+    color: $links;
 }
