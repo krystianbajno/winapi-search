@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/krystianbajno/winapi-search/badge)](https://www.codefactor.io/repository/github/krystianbajno/winapi-search)
+
 # WinAPI Search
 
 ## Overview
