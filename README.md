@@ -1,4 +1,5 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/krystianbajno/winapi-search/badge)](https://www.codefactor.io/repository/github/krystianbajno/winapi-search)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b61eabb446704e6d831124dec4797fdb)](https://app.codacy.com/gh/krystianbajno/winapi-search/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 # WinAPI Search
 
